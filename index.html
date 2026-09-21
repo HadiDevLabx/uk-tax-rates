@@ -68,7 +68,7 @@ current and versioned, so you can fetch it instead.</p>
 
 <p>Pin to a tax year when you need a calculation to stay reproducible:</p>
 
-<pre><code>fetch('https://cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.0/data/2026-27.json')
+<pre><code>fetch('https://cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.1/data/2026-27.json')
   .then(r =&gt; r.json())
   .then(d =&gt; {
     d.incomeTax.personalAllowance      // 12570
@@ -81,7 +81,7 @@ current and versioned, so you can fetch it instead.</p>
 <div class="scroll">
 <table>
 <tr><th>URL</th><th>CORS</th><th>Type</th><th>Use for</th></tr>
-<tr><td><code>cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.0/data/…</code></td><td>✅</td><td><code>application/json</code></td><td><strong>Pinned.</strong> Served <code>immutable</code>, cached a year. Reproducible calculations</td></tr>
+<tr><td><code>cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.1/data/…</code></td><td>✅</td><td><code>application/json</code></td><td><strong>Pinned.</strong> Served <code>immutable</code>, cached a year. Reproducible calculations</td></tr>
 <tr><td><code>cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@main/data/…</code></td><td>✅</td><td><code>application/json</code></td><td>Follows the repo. 12-hour edge cache</td></tr>
 <tr><td><code>raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/…</code></td><td>✅</td><td><code>text/plain</code></td><td>No CDN, no cache delay</td></tr>
 <tr><td><code>hadidevlabx.github.io/uk-tax-rates/data/…</code></td><td>❌</td><td><code>application/json</code></td><td>Server-side and <code>curl</code> only</td></tr>
