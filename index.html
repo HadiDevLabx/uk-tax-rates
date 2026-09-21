@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>UK tax rates as JSON — free, versioned, every tax year</title>
-<meta name="description" content="Income tax bands for England, Wales and Scotland, National Insurance thresholds and all five student loan plans, as plain JSON. One file per tax year, free under CC BY 4.0.">
+<meta name="description" content="UK income tax bands for England, Wales and Scotland, National Insurance thresholds and all five student loan plans, as plain JSON. One file per tax year, free under CC BY 4.0. There is no official HMRC rates API — this is the alternative.">
+<meta name="keywords" content="uk tax rates json, uk income tax bands api, hmrc rates api, national insurance thresholds json, paye rates json, student loan repayment thresholds, plan 5 student loan threshold, scottish income tax bands, personal allowance api, uk payroll data, uk tax dataset, tax year json, open data uk tax">
 <link rel="canonical" href="https://hadidevlabx.github.io/uk-tax-rates/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318181b'/%3E%3Cpath d='M14 44V34M26 44V28M38 44V22M50 40V14' stroke='%23fff' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='48' r='4.5' fill='%23f59e0b'/%3E%3C/svg%3E">
 <style>
@@ -21,6 +22,7 @@
   .brand span{display:block;font-size:.8rem;font-weight:400;color:var(--mid)}
   h1{font-size:1.9rem;line-height:1.2;margin:0 0 .5rem;letter-spacing:-.02em}
   h2{font-size:1.15rem;margin:2.5rem 0 .75rem;letter-spacing:-.01em}
+  h3{font-size:1rem;margin:1.6rem 0 .35rem;letter-spacing:-.01em}
   p{color:var(--mid)}
   .lede{font-size:1.1rem;color:var(--mid);margin:0 0 2rem}
   a{color:var(--acc)}
@@ -66,7 +68,7 @@ current and versioned, so you can fetch it instead.</p>
 
 <p>Pin to a tax year when you need a calculation to stay reproducible:</p>
 
-<pre><code>fetch('https://taxbands.pages.dev/data/2026-27.json')
+<pre><code>fetch('https://raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/2026-27.json')
   .then(r =&gt; r.json())
   .then(d =&gt; {
     d.incomeTax.personalAllowance      // 12570
@@ -75,13 +77,16 @@ current and versioned, so you can fetch it instead.</p>
   })</code></pre>
 
 <div class="note">
-<p><strong>Fetching from a browser?</strong> GitHub Pages sends no
-<code>Access-Control-Allow-Origin</code> header, so a cross-origin
-<code>fetch()</code> against <code>hadidevlabx.github.io</code> is blocked.
-Use <a href="https://taxbands.pages.dev/data/latest.json">taxbands.pages.dev</a>
-— same files, CORS enabled, correct content type. Server-side (Node, Python,
-curl) either host is fine, because CORS is a browser rule rather than a server
-one.</p>
+<p><strong>Fetching from a browser?</strong> Use the
+<code>raw.githubusercontent.com</code> URL above, not this Pages domain.
+GitHub Pages sends no <code>Access-Control-Allow-Origin</code> header, so a
+cross-origin <code>fetch()</code> against <code>hadidevlabx.github.io</code> is
+blocked by the browser. The raw URL sends <code>Access-Control-Allow-Origin:
+*</code> and serves the identical file. It is typed <code>text/plain</code>
+rather than <code>application/json</code>, which does not matter —
+<code>Response.json()</code> parses the body regardless of content type.</p>
+<p>Server-side — Node, Python, curl, anything that is not a browser — either
+host works, because CORS is a browser rule and not a server one.</p>
 </div>
 
 <h2>What is in each file</h2>
@@ -165,6 +170,42 @@ constants, the calculator at
 <a href="https://truetakehome.co.uk/">truetakehome.co.uk</a> does that, and
 <a href="https://truetakehome.co.uk/rates.json">truetakehome.co.uk/rates.json</a>
 serves the current year live from the same source.</p>
+
+<h2>Common questions</h2>
+
+<h3>Is there an official HMRC API for tax rates?</h3>
+<p>No. HMRC's developer hub covers <em>submission</em> — RTI, Making Tax
+Digital, PAYE returns — not the rate tables themselves. There is no official
+endpoint serving the personal allowance, the bands or the NI thresholds, which
+is why almost every UK payroll project hard-codes them. This dataset exists to
+fill that gap.</p>
+
+<h3>Where do I get UK income tax bands in code?</h3>
+<p>From <a href="data/latest.json">data/latest.json</a> for the current tax
+year, or a pinned file like <a href="data/2026-27.json">data/2026-27.json</a>
+when a calculation has to stay reproducible. Both carry England, Wales and
+Scotland.</p>
+
+<h3>Are the National Insurance thresholds in here too?</h3>
+<p>Yes — employee thresholds and rates under
+<code>nationalInsurance.employee</code>, including the category B reduced rate
+for married women and widows, and employer figures under
+<code>nationalInsurance.employer</code>.</p>
+
+<h3>Does it cover all five student loan plans?</h3>
+<p>Yes: Plans 1, 2, 4, 5 and Postgraduate, each with its threshold and rate.
+Plan 5 is the one most libraries are missing — repayments began in April 2026
+and its £25,000 threshold is the lowest of all the plans, so a Plan 5 borrower
+repays more than a Plan 2 borrower on the same salary.</p>
+
+<h3>How often is it updated?</h3>
+<p>Each April, when the new tax year takes effect. The figures are generated
+from tables whose build fails rather than serve a stale year, so the dataset
+cannot silently drift. <code>meta.reviewedOn</code> in every file records when
+it was last checked.</p>
+
+<h3>Can I use it in a commercial product?</h3>
+<p>Yes. CC BY 4.0 — keep the attribution line and you are done.</p>
 
 <h2>Licence</h2>
 
