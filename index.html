@@ -3,36 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>UK tax rates as JSON — free, versioned, every tax year</title>
 <meta name="description" content="Income tax bands for England, Wales and Scotland, National Insurance thresholds and all five student loan plans, as plain JSON. One file per tax year, free under CC BY 4.0.">
 <link rel="canonical" href="https://hadidevlabx.github.io/uk-tax-rates/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318181b'/%3E%3Cpath d='M14 44V34M26 44V28M38 44V22M50 40V14' stroke='%23fff' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='48' r='4.5' fill='%23f59e0b'/%3E%3C/svg%3E">
 <style>
-  :root{--ink:#1c1917;--mid:#57534e;--line:#e7e5e4;--bg:#fafaf9;--acc:#b45309}
-  @media(prefers-color-scheme:dark){:root{--ink:#f5f5f4;--mid:#a8a29e;--line:#292524;--bg:#0c0a09;--acc:#fbbf24}}
+  :root{--ink:#1c1917;--mid:#57534e;--line:#e7e5e4;--bg:#fafaf9;--card:#fff;--acc:#b45309}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
        font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
   .wrap{max-width:46rem;margin:0 auto;padding:3rem 1.25rem 5rem}
+  .brand{display:flex;align-items:center;gap:.7rem;margin:0 0 2rem;
+         text-decoration:none;color:var(--ink)}
+  .brand svg{width:34px;height:34px;flex:none;border-radius:8px}
+  .brand b{font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+  .brand span{display:block;font-size:.8rem;font-weight:400;color:var(--mid)}
   h1{font-size:1.9rem;line-height:1.2;margin:0 0 .5rem;letter-spacing:-.02em}
   h2{font-size:1.15rem;margin:2.5rem 0 .75rem;letter-spacing:-.01em}
   p{color:var(--mid)}
   .lede{font-size:1.1rem;color:var(--mid);margin:0 0 2rem}
   a{color:var(--acc)}
   code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.875rem}
-  pre{background:var(--bg);border:1px solid var(--line);border-radius:.5rem;
+  pre{background:var(--card);border:1px solid var(--line);border-radius:.5rem;
       padding:.9rem 1rem;overflow-x:auto}
   code:not(pre code){background:var(--line);padding:.1rem .35rem;border-radius:.25rem}
+  .scroll{overflow-x:auto}
   table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.5rem 0}
-  th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line)}
+  th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);
+        vertical-align:top}
   th{font-weight:600}
-  td:last-child,th:last-child{text-align:right}
-  .note{border-left:3px solid var(--acc);padding:.15rem 0 .15rem 1rem;margin:1.5rem 0}
+  .note{border-left:3px solid var(--acc);background:var(--card);
+        padding:.15rem 1rem;margin:1.5rem 0;border-radius:0 .4rem .4rem 0}
   footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);
          font-size:.9rem;color:var(--mid)}
 </style>
 </head>
 <body>
 <div class="wrap">
+
+<a class="brand" href="https://truetakehome.co.uk/">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
+    <rect width="64" height="64" rx="14" fill="#18181b"/>
+    <path d="M14 44V34M26 44V28M38 44V22M50 40V14" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="50" cy="48" r="4.5" fill="#f59e0b"/>
+  </svg>
+  <b>True Take-Home<span>Open data for UK payroll</span></b>
+</a>
 
 <h1>UK tax rates, as JSON</h1>
 <p class="lede">Income tax bands for England, Wales and Scotland, National
@@ -69,6 +86,7 @@ one.</p>
 
 <h2>What is in each file</h2>
 
+<div class="scroll">
 <table>
 <tr><th>Key</th><th>Contains</th></tr>
 <tr><td><code>incomeTax</code></td><td>Personal allowance, the £100,000 taper and its rate, bands by region, standard tax code, Blind Person's Allowance</td></tr>
@@ -78,16 +96,39 @@ one.</p>
 <tr><td><code>statutoryPayments</code></td><td>Statutory Maternity Pay and Statutory Sick Pay</td></tr>
 <tr><td><code>childBenefit</code>, <code>marriageAllowance</code>, <code>taxFreeChildcare</code>, <code>redundancy</code>, <code>companyCarBik</code></td><td>The thresholds these each turn on</td></tr>
 </table>
+</div>
 
-<h2>Tax years</h2>
+<h2>Each block, applied</h2>
 
+<p>Reading a threshold is easy; knowing what it does to a real salary is the
+part that takes a while. Every row below is the same figure from this dataset
+worked through on a live calculator — useful for sanity-checking your own
+implementation against a reference, which is what most of the bug reports on
+payroll code turn out to need.</p>
+
+<div class="scroll">
 <table>
-<tr><th>Tax year</th><th>File</th></tr>
-<tr><td>2026/27 <em>(latest)</em></td><td><a href="data/2026-27.json">data/2026-27.json</a></td></tr>
-<tr><td>2025/26</td><td><a href="data/2025-26.json">data/2025-26.json</a></td></tr>
-<tr><td>2024/25</td><td><a href="data/2024-25.json">data/2024-25.json</a></td></tr>
-<tr><td>Index of all years</td><td><a href="data/index.json">data/index.json</a></td></tr>
+<tr><th>Field</th><th>Worked example</th></tr>
+<tr><td><code>incomeTax.bands</code></td><td><a href="https://truetakehome.co.uk/income-tax-calculator/">Income tax calculator</a></td></tr>
+<tr><td><code>incomeTax.personalAllowance</code></td><td><a href="https://truetakehome.co.uk/">Take-home pay calculator</a></td></tr>
+<tr><td><code>incomeTax.paTaperStart</code></td><td><a href="https://truetakehome.co.uk/100k-tax-trap-calculator/">100k tax trap calculator</a> — the 60% marginal band</td></tr>
+<tr><td><code>incomeTax.paTaperRate</code></td><td><a href="https://truetakehome.co.uk/adjusted-net-income-calculator/">Adjusted net income calculator</a></td></tr>
+<tr><td><code>incomeTax.bands.scotland</code></td><td><a href="https://truetakehome.co.uk/scottish-income-tax-calculator/">Scottish income tax calculator</a> — all six bands</td></tr>
+<tr><td><code>incomeTax.standardTaxCode</code></td><td><a href="https://truetakehome.co.uk/tax-code-checker/">Tax code checker</a></td></tr>
+<tr><td><code>nationalInsurance.employee</code></td><td><a href="https://truetakehome.co.uk/national-insurance-calculator/">National Insurance calculator</a></td></tr>
+<tr><td><code>nationalInsurance.employer</code></td><td><a href="https://truetakehome.co.uk/employer-cost-calculator/">Employer cost calculator</a></td></tr>
+<tr><td><code>studentLoans</code></td><td><a href="https://truetakehome.co.uk/student-loan-repayment-calculator/">Student loan repayment calculator</a> — all five plans</td></tr>
+<tr><td><code>dividends</code></td><td><a href="https://truetakehome.co.uk/dividend-tax-calculator/">Dividend tax calculator</a></td></tr>
+<tr><td><code>selfEmployed</code></td><td><a href="https://truetakehome.co.uk/self-employed-tax-calculator/">Self-employed tax calculator</a></td></tr>
+<tr><td><code>childBenefit</code></td><td><a href="https://truetakehome.co.uk/child-benefit-calculator/">Child Benefit calculator</a> — the HICBC taper</td></tr>
+<tr><td><code>marriageAllowance</code></td><td><a href="https://truetakehome.co.uk/marriage-allowance-calculator/">Marriage Allowance calculator</a></td></tr>
+<tr><td><code>taxFreeChildcare</code></td><td><a href="https://truetakehome.co.uk/tax-free-childcare-calculator/">Tax-Free Childcare calculator</a></td></tr>
+<tr><td><code>redundancy</code></td><td><a href="https://truetakehome.co.uk/redundancy-pay-calculator/">Redundancy pay calculator</a></td></tr>
+<tr><td><code>statutoryPayments.maternity</code></td><td><a href="https://truetakehome.co.uk/maternity-pay-calculator/">Maternity pay calculator</a></td></tr>
+<tr><td><code>statutoryPayments.sickPay</code></td><td><a href="https://truetakehome.co.uk/statutory-sick-pay-calculator/">Statutory Sick Pay calculator</a></td></tr>
+<tr><td><code>companyCarBik</code></td><td><a href="https://truetakehome.co.uk/company-car-tax-calculator/">Company car tax calculator</a></td></tr>
 </table>
+</div>
 
 <div class="note">
 <p><strong>Scotland is not England with different numbers.</strong> Scotland has
@@ -95,6 +136,18 @@ six income tax bands against England's three, starting with a 19% starter rate
 and topping out at 48%. National Insurance is reserved, so it does not change.
 Code that models the UK as one band set will be wrong for about 8% of UK
 taxpayers.</p>
+</div>
+
+<h2>Tax years</h2>
+
+<div class="scroll">
+<table>
+<tr><th>Tax year</th><th>File</th></tr>
+<tr><td>2026/27 <em>(latest)</em></td><td><a href="data/2026-27.json">data/2026-27.json</a></td></tr>
+<tr><td>2025/26</td><td><a href="data/2025-26.json">data/2025-26.json</a></td></tr>
+<tr><td>2024/25</td><td><a href="data/2024-25.json">data/2024-25.json</a></td></tr>
+<tr><td>Index of all years</td><td><a href="data/index.json">data/index.json</a></td></tr>
+</table>
 </div>
 
 <h2>Where the figures come from</h2>
