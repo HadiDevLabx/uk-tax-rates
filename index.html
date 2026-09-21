@@ -68,7 +68,7 @@ current and versioned, so you can fetch it instead.</p>
 
 <p>Pin to a tax year when you need a calculation to stay reproducible:</p>
 
-<pre><code>fetch('https://raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/2026-27.json')
+<pre><code>fetch('https://cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.0/data/2026-27.json')
   .then(r =&gt; r.json())
   .then(d =&gt; {
     d.incomeTax.personalAllowance      // 12570
@@ -76,17 +76,27 @@ current and versioned, so you can fetch it instead.</p>
     d.studentLoans.find(p =&gt; p.key === 'plan5').threshold  // 25000
   })</code></pre>
 
+<h3>Which URL to use</h3>
+
+<div class="scroll">
+<table>
+<tr><th>URL</th><th>CORS</th><th>Type</th><th>Use for</th></tr>
+<tr><td><code>cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.0/data/…</code></td><td>✅</td><td><code>application/json</code></td><td><strong>Pinned.</strong> Served <code>immutable</code>, cached a year. Reproducible calculations</td></tr>
+<tr><td><code>cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@main/data/…</code></td><td>✅</td><td><code>application/json</code></td><td>Follows the repo. 12-hour edge cache</td></tr>
+<tr><td><code>raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/…</code></td><td>✅</td><td><code>text/plain</code></td><td>No CDN, no cache delay</td></tr>
+<tr><td><code>hadidevlabx.github.io/uk-tax-rates/data/…</code></td><td>❌</td><td><code>application/json</code></td><td>Server-side and <code>curl</code> only</td></tr>
+</table>
+</div>
+
 <div class="note">
-<p><strong>Fetching from a browser?</strong> Use the
-<code>raw.githubusercontent.com</code> URL above, not this Pages domain.
-GitHub Pages sends no <code>Access-Control-Allow-Origin</code> header, so a
+<p><strong>Fetching from a browser?</strong> Use one of the first three. This
+Pages domain sends no <code>Access-Control-Allow-Origin</code> header, so a
 cross-origin <code>fetch()</code> against <code>hadidevlabx.github.io</code> is
-blocked by the browser. The raw URL sends <code>Access-Control-Allow-Origin:
-*</code> and serves the identical file. It is typed <code>text/plain</code>
-rather than <code>application/json</code>, which does not matter —
-<code>Response.json()</code> parses the body regardless of content type.</p>
-<p>Server-side — Node, Python, curl, anything that is not a browser — either
-host works, because CORS is a browser rule and not a server one.</p>
+blocked. Server-side — Node, Python, curl, anything that is not a browser —
+every row works, because CORS is a browser rule and not a server one.</p>
+<p>Pin to a <code>@tag</code> if a calculation has to give the same answer next
+year. A <code>@main</code> URL is fine for a live lookup but takes up to twelve
+hours to pick up a change at the edge.</p>
 </div>
 
 <h2>What is in each file</h2>

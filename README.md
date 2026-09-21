@@ -20,7 +20,7 @@ Pin to a tax year when a calculation needs to stay reproducible:
 
 ```js
 const r = await fetch(
-  "https://raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/2026-27.json"
+  "https://cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.0/data/2026-27.json"
 ).then((r) => r.json());
 
 r.incomeTax.personalAllowance                        // 12570
@@ -28,22 +28,24 @@ r.incomeTax.bands.scotland                           // 6 bands
 r.studentLoans.find((p) => p.key === "plan5").threshold  // 25000
 ```
 
-### Fetching from a browser
+### Which URL to use
 
-Use the `raw.githubusercontent.com` URL, not the Pages domain:
-
-| URL | CORS | Content-Type |
-| --- | --- | --- |
-| `raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/…` | ✅ | `text/plain` |
-| `hadidevlabx.github.io/uk-tax-rates/data/…` | ❌ | `application/json` |
+| URL | CORS | Type | Use for |
+| --- | --- | --- | --- |
+| `cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.0/data/…` | ✅ | `application/json` | **Pinned.** Served `immutable`, cached a year. Reproducible calculations |
+| `cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@main/data/…` | ✅ | `application/json` | Follows the repo. 12-hour edge cache |
+| `raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/…` | ✅ | `text/plain` | No CDN, no cache delay |
+| `hadidevlabx.github.io/uk-tax-rates/data/…` | ❌ | `application/json` | Server-side and `curl` only |
 
 GitHub Pages sends no `Access-Control-Allow-Origin` header, so a cross-origin
-`fetch()` against it is blocked by the browser. The raw URL sends
-`Access-Control-Allow-Origin: *` and serves the identical bytes. Its
-`text/plain` content type does not matter — `Response.json()` parses the body
-regardless.
+`fetch()` against `hadidevlabx.github.io` is blocked by the browser. Every
+other row sends it.
 
-Server-side — Node, Python, curl, anything that is not a browser — either host
+Pin to a `@tag` if a calculation has to give the same answer next year — those
+URLs are served `immutable`. A `@main` URL is fine for a live lookup but takes
+up to twelve hours to pick up a change at the edge.
+
+Server-side — Node, Python, curl, anything that is not a browser — every row
 works, because CORS is a browser rule and not a server one.
 
 ```python
