@@ -72,6 +72,34 @@ r["nationalInsurance"]["employee"]["primaryThreshold"]  # 12570
 | `statutoryPayments` | Statutory Maternity Pay and Statutory Sick Pay |
 | `childBenefit`, `marriageAllowance`, `taxFreeChildcare`, `redundancy`, `companyCarBik` | The thresholds each of these turns on |
 
+## Each block, applied
+
+Reading a threshold is easy; knowing what it does to a real salary is the part
+that takes a while. Each row is the same figure from this dataset worked
+through on a live calculator — useful for sanity-checking your own
+implementation against a reference.
+
+| Field | Worked example |
+| --- | --- |
+| `incomeTax.bands` | [Income tax calculator](https://truetakehome.co.uk/income-tax-calculator/) |
+| `incomeTax.personalAllowance` | [Take-home pay calculator](https://truetakehome.co.uk/) |
+| `incomeTax.paTaperStart` | [100k tax trap calculator](https://truetakehome.co.uk/100k-tax-trap-calculator/) — the 60% marginal band |
+| `incomeTax.paTaperRate` | [Adjusted net income calculator](https://truetakehome.co.uk/adjusted-net-income-calculator/) |
+| `incomeTax.bands.scotland` | [Scottish income tax calculator](https://truetakehome.co.uk/scottish-income-tax-calculator/) — all six bands |
+| `incomeTax.standardTaxCode` | [Tax code checker](https://truetakehome.co.uk/tax-code-checker/) |
+| `nationalInsurance.employee` | [National Insurance calculator](https://truetakehome.co.uk/national-insurance-calculator/) |
+| `nationalInsurance.employer` | [Employer cost calculator](https://truetakehome.co.uk/employer-cost-calculator/) |
+| `studentLoans` | [Student loan repayment calculator](https://truetakehome.co.uk/student-loan-repayment-calculator/) — all five plans |
+| `dividends` | [Dividend tax calculator](https://truetakehome.co.uk/dividend-tax-calculator/) |
+| `selfEmployed` | [Self-employed tax calculator](https://truetakehome.co.uk/self-employed-tax-calculator/) |
+| `childBenefit` | [Child Benefit calculator](https://truetakehome.co.uk/child-benefit-calculator/) — the HICBC taper |
+| `marriageAllowance` | [Marriage Allowance calculator](https://truetakehome.co.uk/marriage-allowance-calculator/) |
+| `taxFreeChildcare` | [Tax-Free Childcare calculator](https://truetakehome.co.uk/tax-free-childcare-calculator/) |
+| `redundancy` | [Redundancy pay calculator](https://truetakehome.co.uk/redundancy-pay-calculator/) |
+| `statutoryPayments.maternity` | [Maternity pay calculator](https://truetakehome.co.uk/maternity-pay-calculator/) |
+| `statutoryPayments.sickPay` | [Statutory Sick Pay calculator](https://truetakehome.co.uk/statutory-sick-pay-calculator/) |
+| `companyCarBik` | [Company car tax calculator](https://truetakehome.co.uk/company-car-tax-calculator/) |
+
 ## Scotland is not England with different numbers
 
 Scotland has **six** income tax bands against England's three, starting with a
