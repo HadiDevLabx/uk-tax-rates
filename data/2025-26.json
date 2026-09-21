@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "taxYear": "2025/26",
+    "effectiveFrom": "2025-04-06",
+    "effectiveTo": "2026-04-05",
+    "reviewedOn": "2026-08-29",
+    "primarySource": "https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2025-to-2026",
+    "source": "https://truetakehome.co.uk",
+    "repository": "https://github.com/HadiDevLabx/uk-tax-rates",
+    "license": "CC BY 4.0 — free to use commercially with attribution.",
+    "attribution": "Data: True Take-Home (https://truetakehome.co.uk)",
+    "note": "incomeTax, nationalInsurance and studentLoans are the figures for this tax year. The remaining blocks are current values and are not year-versioned yet; check `reviewedOn` before relying on them for a historical calculation."
+  },
+  "incomeTax": {
+    "personalAllowance": 12570,
+    "paTaperStart": 100000,
+    "paTaperRate": 0.5,
+    "bands": {
+      "england": [
+        {
+          "label": "Basic rate",
+          "upTo": 37700,
+          "rate": 0.2
+        },
+        {
+          "label": "Higher rate",
+          "upTo": 125140,
+          "rate": 0.4
+        },
+        {
+          "label": "Additional rate",
+          "upTo": null,
+          "rate": 0.45
+        }
+      ],
+      "wales": [
+        {
+          "label": "Basic rate",
+          "upTo": 37700,
+          "rate": 0.2
+        },
+        {
+          "label": "Higher rate",
+          "upTo": 125140,
+          "rate": 0.4
+        },
+        {
+          "label": "Additional rate",
+          "upTo": null,
+          "rate": 0.45
+        }
+      ],
+      "scotland": [
+        {
+          "label": "Starter rate",
+          "upTo": 2827,
+          "rate": 0.19
+        },
+        {
+          "label": "Basic rate",
+          "upTo": 14921,
+          "rate": 0.2
+        },
+        {
+          "label": "Intermediate rate",
+          "upTo": 31092,
+          "rate": 0.21
+        },
+        {
+          "label": "Higher rate",
+          "upTo": 62430,
+          "rate": 0.42
+        },
+        {
+          "label": "Advanced rate",
+          "upTo": 125140,
+          "rate": 0.45
+        },
+        {
+          "label": "Top rate",
+          "upTo": null,
+          "rate": 0.48
+        }
+      ]
+    },
+    "standardTaxCode": "1257L",
+    "blindPersonsAllowance": 3130
+  },
+  "nationalInsurance": {
+    "employee": {
+      "primaryThreshold": 12570,
+      "upperEarningsLimit": 50270,
+      "mainRate": 0.08,
+      "upperRate": 0.02,
+      "reducedRate": 0.0185,
+      "sourceUrl": "https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2025-to-2026"
+    },
+    "employer": {
+      "niRate": 0.15,
+      "secondaryThresholdAnnual": 5000,
+      "secondaryThresholdWeekly": 96,
+      "apprenticeshipLevy": 0.005,
+      "sourceUrl": "https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2026-to-2027",
+      "reviewedOn": "2026-08-28"
+    }
+  },
+  "studentLoans": [
+    {
+      "key": "plan1",
+      "label": "Plan 1",
+      "threshold": 26065,
+      "rate": 0.09
+    },
+    {
+      "key": "plan2",
+      "label": "Plan 2",
+      "threshold": 28470,
+      "rate": 0.09
+    },
+    {
+      "key": "plan4",
+      "label": "Plan 4 (Scotland)",
+      "threshold": 32745,
+      "rate": 0.09,
+      "note": "For students who took out loans through the Student Awards Agency Scotland."
+    },
+    {
+      "key": "postgrad",
+      "label": "Postgraduate Loan",
+      "threshold": 21000,
+      "rate": 0.06
+    }
+  ],
+  "dividends": {
+    "allowance": 500,
+    "basicRate": 0.1075,
+    "higherRate": 0.3575,
+    "additionalRate": 0.3935,
+    "sourceUrl": "https://www.gov.uk/tax-on-dividends",
+    "reviewedOn": "2026-08-28"
+  },
+  "selfEmployed": {
+    "class4LowerRate": 0.06,
+    "class4UpperRate": 0.02,
+    "class4Lower": 12570,
+    "class4Upper": 50270,
+    "class2Voluntary": 3.65,
+    "class2TreatedPaidFrom": 7105,
+    "tradingAllowance": 1000,
+    "sourceUrl": "https://www.gov.uk/self-employed-national-insurance-rates",
+    "reviewedOn": "2026-08-28"
+  },
+  "redundancy": {
+    "weeklyCap": 751,
+    "maxStatutory": 22530,
+    "serviceCapYears": 20,
+    "taxFree": 30000,
+    "sourceUrl": "https://www.gov.uk/redundancy-your-rights/redundancy-pay",
+    "reviewedOn": "2026-08-28"
+  },
+  "statutoryPayments": {
+    "maternity": {
+      "fullRateWeeks": 6,
+      "flatRateWeeks": 33,
+      "weeklyRate": 194.32,
+      "sourceUrl": "https://www.gov.uk/maternity-pay-leave/pay",
+      "reviewedOn": "2026-08-28"
+    },
+    "sickPay": {
+      "weeklyRate": 123.25,
+      "earningsCap": 0.8,
+      "maxWeeks": 28,
+      "sourceUrl": "https://www.gov.uk/statutory-sick-pay",
+      "reviewedOn": "2026-08-30"
+    }
+  },
+  "taxFreeChildcare": {
+    "topUpRate": 0.25,
+    "annualCap": 2000,
+    "annualCapDisabled": 4000,
+    "aniLimit": 100000,
+    "sourceUrl": "https://www.gov.uk/tax-free-childcare",
+    "reviewedOn": "2026-08-28"
+  },
+  "marriageAllowance": {
+    "transfer": 1260,
+    "maxSaving": 252,
+    "sourceUrl": "https://www.gov.uk/marriage-allowance",
+    "reviewedOn": "2026-08-28"
+  },
+  "childBenefit": {
+    "eldestWeekly": 27.05,
+    "additionalWeekly": 17.9,
+    "hicbcStart": 60000,
+    "hicbcEnd": 80000,
+    "sourceUrl": "https://www.gov.uk/child-benefit-rates",
+    "reviewedOn": "2026-08-28"
+  },
+  "companyCarBik": {
+    "zeroEmission": 0.04,
+    "maxRate": 0.37,
+    "hybridBands": [
+      {
+        "label": "Electric range 130+ miles",
+        "rate": 0.04
+      },
+      {
+        "label": "Electric range 70–129 miles",
+        "rate": 0.07
+      },
+      {
+        "label": "Electric range 40–69 miles",
+        "rate": 0.1
+      },
+      {
+        "label": "Electric range 30–39 miles",
+        "rate": 0.14
+      },
+      {
+        "label": "Electric range under 30 miles",
+        "rate": 0.16
+      }
+    ],
+    "sourceUrl": "https://www.gov.uk/guidance/company-car-benefit-the-appropriate-percentage-480-appendix-2",
+    "reviewedOn": "2026-08-28"
+  }
+}

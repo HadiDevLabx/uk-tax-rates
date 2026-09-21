@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UK tax rates as JSON — free, versioned, every tax year</title>
+<meta name="description" content="Income tax bands for England, Wales and Scotland, National Insurance thresholds and all five student loan plans, as plain JSON. One file per tax year, free under CC BY 4.0.">
+<link rel="canonical" href="https://hadidevlabx.github.io/uk-tax-rates/">
+<style>
+  :root{--ink:#1c1917;--mid:#57534e;--line:#e7e5e4;--bg:#fafaf9;--acc:#b45309}
+  @media(prefers-color-scheme:dark){:root{--ink:#f5f5f4;--mid:#a8a29e;--line:#292524;--bg:#0c0a09;--acc:#fbbf24}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:46rem;margin:0 auto;padding:3rem 1.25rem 5rem}
+  h1{font-size:1.9rem;line-height:1.2;margin:0 0 .5rem;letter-spacing:-.02em}
+  h2{font-size:1.15rem;margin:2.5rem 0 .75rem;letter-spacing:-.01em}
+  p{color:var(--mid)}
+  .lede{font-size:1.1rem;color:var(--mid);margin:0 0 2rem}
+  a{color:var(--acc)}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.875rem}
+  pre{background:var(--bg);border:1px solid var(--line);border-radius:.5rem;
+      padding:.9rem 1rem;overflow-x:auto}
+  code:not(pre code){background:var(--line);padding:.1rem .35rem;border-radius:.25rem}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.5rem 0}
+  th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line)}
+  th{font-weight:600}
+  td:last-child,th:last-child{text-align:right}
+  .note{border-left:3px solid var(--acc);padding:.15rem 0 .15rem 1rem;margin:1.5rem 0}
+  footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);
+         font-size:.9rem;color:var(--mid)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>UK tax rates, as JSON</h1>
+<p class="lede">Income tax bands for England, Wales and Scotland, National
+Insurance thresholds and all five student loan plans — one file per tax year,
+free to use commercially with attribution.</p>
+
+<p>Every UK payroll project starts by hard-coding the bands into a constants
+file, and every April that file is quietly wrong. This is that file, kept
+current and versioned, so you can fetch it instead.</p>
+
+<h2>Use it</h2>
+
+<pre><code>curl https://hadidevlabx.github.io/uk-tax-rates/data/latest.json</code></pre>
+
+<p>Pin to a tax year when you need a calculation to stay reproducible:</p>
+
+<pre><code>fetch('https://taxbands.pages.dev/data/2026-27.json')
+  .then(r =&gt; r.json())
+  .then(d =&gt; {
+    d.incomeTax.personalAllowance      // 12570
+    d.incomeTax.bands.scotland         // 6 bands
+    d.studentLoans.find(p =&gt; p.key === 'plan5').threshold  // 25000
+  })</code></pre>
+
+<div class="note">
+<p><strong>Fetching from a browser?</strong> GitHub Pages sends no
+<code>Access-Control-Allow-Origin</code> header, so a cross-origin
+<code>fetch()</code> against <code>hadidevlabx.github.io</code> is blocked.
+Use <a href="https://taxbands.pages.dev/data/latest.json">taxbands.pages.dev</a>
+— same files, CORS enabled, correct content type. Server-side (Node, Python,
+curl) either host is fine, because CORS is a browser rule rather than a server
+one.</p>
+</div>
+
+<h2>What is in each file</h2>
+
+<table>
+<tr><th>Key</th><th>Contains</th></tr>
+<tr><td><code>incomeTax</code></td><td>Personal allowance, the £100,000 taper and its rate, bands by region, standard tax code, Blind Person's Allowance</td></tr>
+<tr><td><code>nationalInsurance</code></td><td>Employee thresholds and rates including the category B reduced rate, plus employer figures</td></tr>
+<tr><td><code>studentLoans</code></td><td>All five plans — 1, 2, 4, 5 and Postgraduate — with thresholds and rates</td></tr>
+<tr><td><code>dividends</code>, <code>selfEmployed</code></td><td>Dividend allowance and rates; Class 2 and Class 4 NI</td></tr>
+<tr><td><code>statutoryPayments</code></td><td>Statutory Maternity Pay and Statutory Sick Pay</td></tr>
+<tr><td><code>childBenefit</code>, <code>marriageAllowance</code>, <code>taxFreeChildcare</code>, <code>redundancy</code>, <code>companyCarBik</code></td><td>The thresholds these each turn on</td></tr>
+</table>
+
+<h2>Tax years</h2>
+
+<table>
+<tr><th>Tax year</th><th>File</th></tr>
+<tr><td>2026/27 <em>(latest)</em></td><td><a href="data/2026-27.json">data/2026-27.json</a></td></tr>
+<tr><td>2025/26</td><td><a href="data/2025-26.json">data/2025-26.json</a></td></tr>
+<tr><td>2024/25</td><td><a href="data/2024-25.json">data/2024-25.json</a></td></tr>
+<tr><td>Index of all years</td><td><a href="data/index.json">data/index.json</a></td></tr>
+</table>
+
+<div class="note">
+<p><strong>Scotland is not England with different numbers.</strong> Scotland has
+six income tax bands against England's three, starting with a 19% starter rate
+and topping out at 48%. National Insurance is reserved, so it does not change.
+Code that models the UK as one band set will be wrong for about 8% of UK
+taxpayers.</p>
+</div>
+
+<h2>Where the figures come from</h2>
+
+<p>Each file carries a <code>meta.primarySource</code> pointing at the gov.uk or
+gov.scot page the figures were read from, and a <code>meta.reviewedOn</code>
+date saying when that was last checked. They are generated from the rate tables
+behind
+<a href="https://truetakehome.co.uk/">True Take-Home</a>, a free UK take-home pay
+calculator, whose build fails rather than serve a stale tax year — so the data
+here cannot silently drift past an April.</p>
+
+<p>If you want the same figures applied to an actual salary rather than as raw
+constants, the calculator at
+<a href="https://truetakehome.co.uk/">truetakehome.co.uk</a> does that, and
+<a href="https://truetakehome.co.uk/rates.json">truetakehome.co.uk/rates.json</a>
+serves the current year live from the same source.</p>
+
+<h2>Licence</h2>
+
+<p>CC BY 4.0. Free for commercial use. The attribution line is the only
+condition:</p>
+
+<pre><code>Data: True Take-Home (https://truetakehome.co.uk)</code></pre>
+
+<div class="note">
+<p><strong>No warranty.</strong> These are published figures transcribed
+carefully and checked, not tax advice. If you are shipping payroll, verify
+against HMRC's own tables before you rely on them.</p>
+</div>
+
+<footer>
+<p>Maintained alongside
+<a href="https://truetakehome.co.uk/">True Take-Home</a> ·
+<a href="https://github.com/HadiDevLabx/uk-tax-rates">Source and issues on GitHub</a></p>
+</footer>
+
+</div>
+</body>
+</html>
