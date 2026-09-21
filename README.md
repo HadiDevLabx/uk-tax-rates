@@ -20,7 +20,7 @@ Pin to a tax year when a calculation needs to stay reproducible:
 
 ```js
 const r = await fetch(
-  "https://cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.0/data/2026-27.json"
+  "https://cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.1/data/2026-27.json"
 ).then((r) => r.json());
 
 r.incomeTax.personalAllowance                        // 12570
@@ -32,7 +32,7 @@ r.studentLoans.find((p) => p.key === "plan5").threshold  // 25000
 
 | URL | CORS | Type | Use for |
 | --- | --- | --- | --- |
-| `cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.0/data/…` | ✅ | `application/json` | **Pinned.** Served `immutable`, cached a year. Reproducible calculations |
+| `cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@v1.0.1/data/…` | ✅ | `application/json` | **Pinned.** Served `immutable`, cached a year. Reproducible calculations |
 | `cdn.jsdelivr.net/gh/HadiDevLabx/uk-tax-rates@main/data/…` | ✅ | `application/json` | Follows the repo. 12-hour edge cache |
 | `raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/…` | ✅ | `text/plain` | No CDN, no cache delay |
 | `hadidevlabx.github.io/uk-tax-rates/data/…` | ❌ | `application/json` | Server-side and `curl` only |
