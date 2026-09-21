@@ -20,7 +20,7 @@ Pin to a tax year when a calculation needs to stay reproducible:
 
 ```js
 const r = await fetch(
-  "https://taxbands.pages.dev/data/2026-27.json"
+  "https://raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/2026-27.json"
 ).then((r) => r.json());
 
 r.incomeTax.personalAllowance                        // 12570
@@ -30,18 +30,21 @@ r.studentLoans.find((p) => p.key === "plan5").threshold  // 25000
 
 ### Fetching from a browser
 
-GitHub Pages sends no `Access-Control-Allow-Origin` header, so a cross-origin
-`fetch()` against `hadidevlabx.github.io` is blocked by the browser. Use one
-of these instead — same files, same bytes:
+Use the `raw.githubusercontent.com` URL, not the Pages domain:
 
 | URL | CORS | Content-Type |
 | --- | --- | --- |
-| `https://taxbands.pages.dev/data/…` | ✅ | `application/json` |
-| `https://raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/…` | ✅ | `text/plain` |
-| `https://hadidevlabx.github.io/uk-tax-rates/data/…` | ❌ | `application/json` |
+| `raw.githubusercontent.com/HadiDevLabx/uk-tax-rates/main/data/…` | ✅ | `text/plain` |
+| `hadidevlabx.github.io/uk-tax-rates/data/…` | ❌ | `application/json` |
 
-Server-side (Node, Python, curl) any of the three is fine — CORS is a browser
-rule, not a server one.
+GitHub Pages sends no `Access-Control-Allow-Origin` header, so a cross-origin
+`fetch()` against it is blocked by the browser. The raw URL sends
+`Access-Control-Allow-Origin: *` and serves the identical bytes. Its
+`text/plain` content type does not matter — `Response.json()` parses the body
+regardless.
+
+Server-side — Node, Python, curl, anything that is not a browser — either host
+works, because CORS is a browser rule and not a server one.
 
 ```python
 import requests
