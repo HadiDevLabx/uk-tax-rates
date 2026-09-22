@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://hadidevlabx.github.io/uk-tax-rates/</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url><loc>https://hadidevlabx.github.io/uk-tax-rates/data/latest.json</loc><lastmod>2026-09-22</lastmod></url>
+  <url><loc>https://hadidevlabx.github.io/uk-tax-rates/data/2026-27.json</loc><lastmod>2026-09-22</lastmod></url>
+  <url><loc>https://hadidevlabx.github.io/uk-tax-rates/data/2025-26.json</loc><lastmod>2026-09-22</lastmod></url>
+  <url><loc>https://hadidevlabx.github.io/uk-tax-rates/data/2024-25.json</loc><lastmod>2026-09-22</lastmod></url>
+  <url><loc>https://hadidevlabx.github.io/uk-tax-rates/data/index.json</loc><lastmod>2026-09-22</lastmod></url>
+</urlset>
